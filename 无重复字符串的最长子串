@@ -20,26 +20,30 @@
 
 输入: s = ""
 输出: 0
- 
-
 提示：
-
 0 <= s.length <= 5 * 104
 s 由英文字母、数字、符号和空格组成
 */
-class Solution {
-  public:
-      int lengthOfLongestSubstring(string s) {
-          set<char> t;//保存已经出现过的字符
-          int res = 0, left = 0, right = 0;
-          while (right < s.size()) {
-              if (t.find(s[right]) == t.end()) {//一直没有找到(无重复)，便一直return end（）
-                 t.insert(s[right++]);
-                  res = max(res, (int)t.size());//计算最长字符串
-             }  else {
-                 t.erase(s[left++]);//从set中擦除一个字符，已经出现过
-             }
-         }
-         return res;
-     }
- };
+#include<bits/stdc++.h>
+using namespace std;
+int lengthOfLongestSubstring(string s){
+	set <char> v;//保存已经出现过的字符 
+	int n=s.size();
+	int res=0,left=0,right=0;
+	if(s==""&&n==0) return 0;
+	while(right<n){
+		if(v.find(s[right])==v.end()){
+			v.insert(s[right++]);
+			res=max(res,(int)v.size());
+		}
+		else{
+			v.erase(s[left++]);
+		}
+	}
+	return res;
+}
+int main(){
+	string s;
+	while(cin>>s)
+	cout<<lengthOfLongestSubstring(s)<<endl;
+} 
